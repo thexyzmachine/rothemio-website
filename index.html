@@ -1,113 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rothemio</title>
-    <!-- Link your CSS, fonts, and meta-tags here -->
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>rothemio // Next-Gen Engineering</title>
+  <style>
+    /* Reset & Core Variables */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg-dark: #09090b;
+      --card-bg: #141417;
+      --card-border: rgba(255, 255, 255, 0.08);
+      --text-main: #f4f4f5;
+      --text-muted: #a1a1aa;
+      --accent-color: #2563eb;
+      --accent-glow: rgba(37, 99, 235, 0.15);
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      /* Subtle grid overlay typical of Codex/OpenAI web layouts */
+      background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+      background-size: 40px 40px;
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow-x: hidden;
+      padding: 24px;
+    }
+
+    /* Ambient Background Glow */
+    .glow-effect {
+      position: absolute;
+      top: -10%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(37, 99, 235, 0.08) 0%, transparent 70%);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* Main Container Card */
+    .codex-container {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 440px;
+      background: rgba(20, 20, 23, 0.85);
+      border: 1px solid var(--card-border);
+      border-radius: 28px; /* Large, sleek rounded corners */
+      padding: 40px 32px;
+      text-align: center;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 
+        0 4px 30px rgba(0, 0, 0, 0.4),
+        0 1px 3px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05); /* Soft internal rim light */
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
+    }
+
+    .codex-container:hover {
+      border-color: rgba(255, 255, 255, 0.15);
+      transform: translateY(-2px);
+    }
+
+    /* Top Badge Tracking Element */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: #60a5fa;
+      background: rgba(37, 99, 235, 0.1);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      padding: 6px 14px;
+      border-radius: 100px; /* Perfect pill geometric shape */
+      margin-bottom: 24px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* Main Branding Typography */
+    .brand-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.04em; /* Tight tracking for an authoritative, modern tech feel */
+      color: #ffffff;
+      margin-bottom: 14px;
+      background: linear-gradient(180deg, #ffffff 0%, #a1a1aa 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Description */
+    .brand-description {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+      font-weight: 400;
+    }
+
+    /* Non-working Download Button Layout */
+    .download-btn {
+      position: relative;
+      width: 100%;
+      padding: 14px 28px;
+      border-radius: 14px; /* Proportional interior rounding */
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: #ffffff;
+      color: #09090b;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: not-allowed; /* Visually communicates it cannot be processed */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Subverted hover effect to show it is disabled but feels premium */
+    .download-btn:hover {
+      background: #f4f4f5;
+      opacity: 0.9;
+    }
+
+    /* Subtle indicator that it's inactive */
+    .status-text {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      margin-top: 12px;
+      display: block;
+      letter-spacing: 0.02em;
+    }
+  </style>
 </head>
 <body>
 
-    <!-- All your visible website content goes here -->
-    <header>
-        <h1>Rothemio</h1>
-    </header>
+  <div class="glow-effect"></div>
 
-    <main>
-        <div class="sleek-card">
-          <span class="tag">Trending</span>
-          <h2 class="title">Modern CSS Architecture</h2>
-          <p class="description">Learn how to build highly responsive, visually stunning components using minimal code and modern layout properties.</p>
-          <button class="action-btn">Explore Now</button>
-        </div>
-    </main>
+  <div class="codex-container">
+    <!-- Section Badge -->
+    <div class="badge">v1.0.0-stable</div>
+    
+    <!-- Branding Header -->
+    <h1 class="brand-title">rothemio</h1>
+    
+    <!-- Narrative/Description -->
+    <p class="brand-description">
+      An elegant, unified environment designed for high-performance automation workflows. Build, structure, and scale background processing tasks seamlessly inside an asynchronous environment.
+    </p>
+    
+    <!-- Non-working Premium Button -->
+    <button class="download-btn" onclick="return false;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v4"></path>
+        <polyline points="7 10 12 15 17 10"></polyline>
+        <line x1="12" y1="15" x2="12" y2="3"></line>
+      </svg>
+      Download Core Engine
+    </button>
+    
+    <!-- Status note -->
+    <span class="status-text">// Downloads temporarily paused for initialization</span>
+  </div>
 
-    <style>
-        /* Base styles for the sleek card */
-    .sleek-card {
-      /* Geometry & Rounded Corners */
-      width: 340px;
-      border-radius: 24px; /* Large, smooth rounding */
-      padding: 28px;
-      
-      /* Color & Transparency */
-      background: rgba(255, 255, 255, 0.75);
-      backdrop-filter: blur(12px); /* Glassmorphism effect */
-      -webkit-backdrop-filter: blur(12px);
-      
-      /* High-Definition Borders & Shadows */
-      border: 1px solid rgba(255, 255, 255, 0.4);
-      box-shadow: 
-        0 4px 30px rgba(0, 0, 0, 0.03),
-        0 1px 3px rgba(0, 0, 0, 0.02);
-      
-      /* Layout */
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    }
-    
-    /* Micro-interaction on hover */
-    .sleek-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
-    }
-    
-    /* Sleek Badge/Tag */
-    .tag {
-      align-self: flex-start;
-      padding: 6px 12px;
-      border-radius: 100px; /* Perfect pill shape */
-      background: #f0f4f8;
-      color: #4a5568;
-      font-size: 0.75rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-    
-    /* Typography */
-    .title {
-      color: #1a202c;
-      font-size: 1.5rem;
-      font-weight: 700;
-      letter-spacing: -0.02em; /* Tighter tracking for bold text */
-      margin: 0;
-    }
-    
-    .description {
-      color: #718096;
-      font-size: 0.95rem;
-      line-height: 1.6;
-      margin: 0;
-    }
-    
-    /* Pill-shaped Button */
-    .action-btn {
-      margin-top: 8px;
-      padding: 12px 24px;
-      border-radius: 14px; /* Slightly less rounded than the card for visual balance */
-      border: none;
-      background: #111111;
-      color: #ffffff;
-      font-weight: 600;
-      font-size: 0.9rem;
-      cursor: pointer;
-      transition: background 0.2s ease;
-    }
-    
-    .action-btn:hover {
-      background: #2d3748;
-    }
-    </style>
-    <footer>
-        <p>&copy; 2026 XYZ Machine</p>
-    </footer>
-  
-    <script>
-      
-    </script>
 </body>
 </html>
